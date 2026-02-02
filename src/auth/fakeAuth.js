@@ -12,6 +12,7 @@ export function fakeLogin({ email, senha }) {
           id: 1,
           name: "Usuário Teste",
           email,
+          biografia: "Amantes de jogos e livros, gamer e leitor apaixonado... "
         })
       } else {
         reject(new Error("Email ou senha inválidos"))
