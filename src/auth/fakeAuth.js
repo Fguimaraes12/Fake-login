@@ -1,17 +1,17 @@
-export function fakeLogin({ gmail, senha }) {
+export function fakeLogin({ email, senha }) {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       // credenciais válidas (mock)
       const validUser = {
-        gmail: "asd",
+        email: "teste@gmail.com",
         senha: "123"
       }
 
-      if (gmail === validUser.gmail && senha === validUser.senha) {
+      if (email === validUser.email && senha === validUser.senha) {
         resolve({
           id: 1,
           name: "Usuário Teste",
-          gmail
+          email,
         })
       } else {
         reject(new Error("Email ou senha inválidos"))
