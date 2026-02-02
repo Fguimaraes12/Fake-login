@@ -9,8 +9,9 @@ if(!state.user){
 }
 
   return(<div>
-    <h1>{state.user.name}</h1>
-    <h1>{state.user.email}</h1>
+    <h1>Name: {state.user.name}</h1>
+    <h1>Email: {state.user.email}</h1>
+    <p>Bio: {state.user.biografia}</p>
   </div>)
 }
 
