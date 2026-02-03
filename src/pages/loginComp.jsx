@@ -1,45 +1,61 @@
-import { useContext, useEffect, useState } from "react";
-import { fakeLogin } from "../auth/fakeAuth";
+import {  useContext, useEffect, useState } from "react";
+import { Api } from "../auth/fakeAuth";
 import { AuthContext } from "../contexts/AuthContext";
 
 
 function LoginComp() {
   const { state, dispatch } = useContext(AuthContext)
-  const [email, setEmail] = useState("")
-  const [senha, setSenha] = useState("")
+  const [username, setUsername] = useState("emilys")
+  const [password, setPassword] = useState("emilyspass")
 
 
-
-
-
-  const handleButton = () => {
-    dispatch({ type: "LOGIN_START" })
-
-    const usuario = {
-      email,
-      senha
+  useEffect(() => {
+    const autoApi = async () => {
+      const token = localStorage.getItem("TOKEN")
+      if(!token) return
+      try{
+         const {data} = await Api.get("/me", {
+          headers:{
+            'Authorization': `Bearer ${token}`
+          }
+         })
+         dispatch({ type: "LOGIN_SUCCESS", payload: data })
+      }catch(err){
+        console.log(err)
+      }
     }
+    autoApi()
+  }, [])
 
-    fakeLogin(usuario)
-      .then(user => {
-        dispatch({ type: "LOGIN_SUCCESS", payload: user })
+  const handleButton = async () => {
+    dispatch({ type: "LOGIN_START" })
+    try{
+      const {data} = await Api.post("/login", {
+        username: username,
+        password: password,
       })
-      .catch(err => dispatch({ type: "LOGIN_ERROR", payload: err.message }))
+      dispatch({ type: "LOGIN_SUCCESS", payload: data })
+      localStorage.setItem("TOKEN", data.accessToken)
+      console.log(data)
+
+    }catch(err){
+      dispatch({ type: "LOGIN_ERROR", payload: "login ou senha incorreto"})
+    }
   }
 
-  const handleButtonLogout = () => {
-    dispatch({ type: "LOGOUT" })
-  }
 
+  return (
+ <div>
+    <div>
+      {state.error ? <h1>{state.error}</h1> : null}
+    </div>
+    <div>
+      <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} />
+      <input type="text" value={password} onChange={(e) => setPassword(e.target.value)} />
+      <button onClick={handleButton} disabled={state.loading === true}>Enviar</button>
+    </div>
 
-  return (<>
-    {state.error ? <h1>{state.error}</h1> : null}
-    {state.isLogged ? <h1>{state.user.name}</h1> : null}
-    <input type="text" onChange={(e) => setEmail(e.target.value)} />
-    <input type="text" onChange={(e) => setSenha(e.target.value)} />
-    <button onClick={handleButton} disabled={state.loading === true}>Enviar</button>
-    <button onClick={handleButtonLogout}>Logout</button>
-  </>)
+ </div>)
 }
 
 export default LoginComp;
