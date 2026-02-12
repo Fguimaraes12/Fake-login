@@ -1,15 +1,15 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import App from './App.jsx'
-import {BrowserRouter} from 'react-router-dom'
-import { LoginProvider } from './context/loginContext.jsx'
+import { StrictMode } from "react"
+import { createRoot } from "react-dom/client"
+import App from "./App.jsx"
+import { LoginProvider } from "./context/loginContext.jsx"
+import { BrowserRouter } from "react-router-dom"
 
-createRoot(document.getElementById('root')).render(
+createRoot(document.getElementById("root")).render(
   <StrictMode>
-     <LoginProvider>
     <BrowserRouter>
-       <App />
+      <LoginProvider>
+        <App />
+      </LoginProvider>
     </BrowserRouter>
-     </LoginProvider>
   </StrictMode>,
 )
