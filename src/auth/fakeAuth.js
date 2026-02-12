@@ -1,14 +1,10 @@
-import axios from "axios"
+import axios from 'axios'
 
-export const Api = axios.create({
-  baseURL: "https://dummyjson.com/auth",
-  timeout: 1000
+ const loginInstance = axios.create({
+  baseURL: 'https://dummyjson.com/auth',
+  timeout: 1000,
 })
 
-
-
-
-
-
+export default loginInstance;
 
 
