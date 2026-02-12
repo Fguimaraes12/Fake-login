@@ -2,6 +2,7 @@
 import { useContext } from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
 import { LoginContext } from "./contexts/loginContext";
+import PrivateRoute from "./routes/privateRoute";
 
 import LoginPage from "./pages/loginPage";
 import UserPage from "./pages/userPage";
@@ -31,7 +32,11 @@ function App() {
       {/* Rota Privada */}
       <Route
         path="/dashboard"
-        element={state.isLogged ? <UserPage /> : <Navigate replace to="/login" />}
+        element={
+          <PrivateRoute>
+            <UserPage/>
+          </PrivateRoute>
+        }
       />
 
       {/* Fallback para rotas não encontradas */}
