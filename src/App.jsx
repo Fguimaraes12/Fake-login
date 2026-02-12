@@ -5,6 +5,7 @@ import { LoginContext } from "./context/loginContext";
 
 import LoginPage from "./pages/loginPage";
 import UserPage from "./pages/userPage";
+import PrivateRoute from "./routes/privateRoute";
 
 function App() {
   const {
@@ -29,9 +30,18 @@ function App() {
       />
 
       {/* Rota Privada */}
-      <Route
+{/*       <Route
         path="/dashboard"
         element={state.isLogged ? <UserPage /> : <Navigate replace to="/login" />}
+      /> */}
+
+      <Route
+      path="/dashboard"
+      element={
+        <PrivateRoute>
+          <UserPage/>
+        </PrivateRoute>
+      }
       />
 
       {/* Fallback para rotas não encontradas */}
