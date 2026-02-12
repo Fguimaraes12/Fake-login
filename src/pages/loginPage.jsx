@@ -2,10 +2,10 @@ import { LoginContext } from "../context/loginContext";
 import { useContext } from "react";
 
 function LoginPage (){
-const {
-   functions: {handleButton, handlePassword, handleUsername},
-   states: {state, username, password },
-} = useContext(LoginContext)
+  const {
+    functions: {handleButton, handlePassword, handleUsername},
+    states: {state, username, password },
+  } = useContext(LoginContext)
 
 const handleSubmit = (e) => {
   e.preventDefault()
@@ -34,9 +34,9 @@ const handleSubmit = (e) => {
          id="password"
        />
 
-       <button 
-        type="submit"
-        disabled={state.isLoading === true}>Enviar</button>
+      <button 
+       type="submit"
+       disabled={state.loading === true}>Enviar</button>
      </form>
     
   </div>
