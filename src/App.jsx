@@ -30,10 +30,6 @@ function App() {
       />
 
       {/* Rota Privada */}
-{/*       <Route
-        path="/dashboard"
-        element={state.isLogged ? <UserPage /> : <Navigate replace to="/login" />}
-      /> */}
 
       <Route
       path="/dashboard"
