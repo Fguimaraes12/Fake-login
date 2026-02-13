@@ -1,12 +1,11 @@
 function UserContact ({authData}){
 
-
   return(
     <div>
-          <ul>
-            <li>phone: {authData?.phone}</li>
-            <li>email: {authData?.email}</li>
-          </ul>
+        <ul>
+          {authData?.phone && <li>phone: {authData?.phone}</li>}
+          {authData?.email && <li>email: {authData?.email}</li>}
+        </ul>
     </div>
   )
 }

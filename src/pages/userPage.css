@@ -1,0 +1,122 @@
+.userPage {
+  padding: 1rem;
+}
+
+.userPage__header {
+  margin-bottom: 1.25rem;
+}
+
+/* Overlay do modal */
+.userPage__overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.75);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 1.5rem;
+  animation: userPageOverlayIn 0.2s ease-out;
+}
+
+@keyframes userPageOverlayIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Container do modal */
+.userPage__modal {
+  position: relative;
+  width: 100%;
+  max-width: 560px;
+  max-height: 90vh;
+  background: #f8fafc;
+  border-radius: 12px;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  animation: userPageModalIn 0.25s ease-out;
+}
+
+@keyframes userPageModalIn {
+  from {
+    opacity: 0;
+    transform: scale(0.96) translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* Área rolável do conteúdo */
+.userPage__modalContent {
+  overflow-y: auto;
+  padding: 1.5rem 1.75rem 2rem;
+  flex: 1;
+}
+
+.userPage__modalContent::-webkit-scrollbar {
+  width: 8px;
+}
+
+.userPage__modalContent::-webkit-scrollbar-track {
+  background: #e2e8f0;
+  border-radius: 4px;
+}
+
+.userPage__modalContent::-webkit-scrollbar-thumb {
+  background: #94a3b8;
+  border-radius: 4px;
+}
+
+.userPage__modalContent::-webkit-scrollbar-thumb:hover {
+  background: #64748b;
+}
+
+/* Seções dentro do modal */
+.userPage__section {
+  margin-bottom: 1.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.userPage__section:last-child {
+  margin-bottom: 0;
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+.userPage__sectionTitle {
+  margin: 0 0 0.75rem 0;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #334155;
+  letter-spacing: -0.01em;
+}
+
+.userPage__loading {
+  margin: 0;
+  padding: 2rem;
+  text-align: center;
+  color: #64748b;
+  font-size: 0.95rem;
+}
+
+.userPage__close{
+  cursor: pointer;
+  width: 100%;
+  height: 50px;
+  transition: all 0.5s ease;
+}
+
+.userPage__close:hover {
+  height: 70px;
+}
+

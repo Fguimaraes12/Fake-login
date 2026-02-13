@@ -1,19 +1,18 @@
 function UserPersonaInfo ({authData}){
 
-
   return(
     <div>
-            <ul>
-          <li>Idade: {authData.age}</li>
-          <li>Data de nascimento: {authData.birthDate}</li>
-          <li>Gênero: {authData.gender}</li>
-          <li>Altura: {authData?.height} cm</li>
-          <li>Peso: {authData?.weight} kg</li>
-          <li>Grupo sanguíneo: {authData?.bloodGroup}</li>
-          <li>Cor dos olhos: {authData?.eyeColor}</li>
-          <li>
-            Cabelo: {authData.hair?.color} ({authData.hair?.type})
-          </li>
+        <ul>
+          {authData?.age != null && <li>Idade: {authData.age}</li>}
+          {authData?.birthDate && <li>Data de nascimento: {authData.birthDate}</li>}
+          {authData?.gender && <li>Gênero: {authData.gender}</li>}
+          {authData?.height && <li>Altura: {authData.height} cm</li>}
+          {authData?.weight && <li>Peso: {authData.weight} kg</li>}
+          {authData?.bloodGroup && <li>Grupo sanguíneo: {authData.bloodGroup}</li>}
+          {authData?.eyeColor && <li>Cor dos olhos: {authData.eyeColor}</li>}
+          {(authData?.hair?.color || authData?.hair?.type) && (
+            <li>Cabelo: {authData.hair?.color} {authData.hair?.type && `(${authData.hair.type})`}</li>
+          )}
         </ul>
     </div>
   )
