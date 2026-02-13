@@ -10,30 +10,31 @@ function LoginProvider({ children }) {
   const [state, dispatch] = useReducer(Reducer, initialState)
   const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")
-  const [authData, setAuthData] = useState(null)
+  const [authData, setAuthData] = useState(null) // dados basicos do login 
+  const [profileData, setProfileData] = useState(null) // dados completos de /me (address, company, bank, crypto, etc.)
 
 
-// LOGIN AUTOMATICO 
-  useEffect(() => {
-    const loginToken = async () => {
-      const token = localStorage.getItem("TOKEN_ACCESS")
-      if (token) {
-        try {
-          const { data } = await loginInstance.get("/me", {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          })
-          dispatch({ type: "LOGIN_SUCCESS", payload: data })
-          setAuthData(data)
-        } catch (error) {
-          console.error("Token inválido ou expirado:", error)
-        }
+// Busca dados detalhados do perfil (auth/me) - usado no modal
+const handleProfile = async () => {
+    const token = localStorage.getItem("TOKEN_ACCESS")
+    if (token) {
+      try {
+        const { data } = await loginInstance.get("/me", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+          credentials: 'include'
+        })
+        setProfileData(data)
+        return data
+      } catch (error) {
+        console.error("Token inválido ou expirado:", error)
+        return null
       }
     }
+    return null
+}
 
-    loginToken()
-  }, [])
 
 // VALUE -> USERNAME & PASSWORD
   const handleUsername = (e) => {
@@ -55,7 +56,7 @@ function LoginProvider({ children }) {
         username,
         password,
       })
-      localStorage.setItem("TOKEN_ACCESS", data.accessToken)
+      localStorage.setItem("TOKEN_ACCESS", data.refreshToken)
       setAuthData(data)
       dispatch({ type: "LOGIN_SUCCESS", payload: data })
     } catch (error) {
@@ -65,10 +66,10 @@ function LoginProvider({ children }) {
 
   const contextValue = useMemo(
     () => ({
-      functions: { handleButton, handlePassword, handleUsername },
-      states: { state, username, password, authData },
+      functions: { handleButton, handleProfile, handlePassword, handleUsername },
+      states: { state, username, password, authData, profileData },
     }),
-    [state, username, password, authData]
+    [state, username, password, authData, profileData]
   )
 
   return (
