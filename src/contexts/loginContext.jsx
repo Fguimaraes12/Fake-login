@@ -14,9 +14,28 @@ function LoginProvider({ children }) {
   const [profileData, setProfileData] = useState(null) // dados completos de /me (address, company, bank, crypto, etc.)
 
 
+
+const refreshAccessToken = async () => {
+  const refreshToken = localStorage.getItem("REFRESH_TOKEN")
+  if(refreshToken){
+    try{
+      const {data} = await loginInstance.post("/refresh", {
+          refreshToken: `${refreshToken}`,
+          expiresInMins: 30,
+      })
+      console.log(data)
+      localStorage.setItem("ACCESS_TOKEN", data.accessToken)
+    }catch (error) {
+        console.error("Token inválido ou expirado:", error)
+        return null
+      }
+  }
+}
+
+
 // Busca dados detalhados do perfil (auth/me) - usado no modal
 const handleProfile = async () => {
-    const token = localStorage.getItem("TOKEN_ACCESS")
+    const token = localStorage.getItem("REFRESH_TOKEN")
     if (token) {
       try {
         const { data } = await loginInstance.get("/me", {
@@ -36,16 +55,6 @@ const handleProfile = async () => {
 }
 
 
-// VALUE -> USERNAME & PASSWORD
-  const handleUsername = (e) => {
-    const { value } = e.target
-    setUsername(value)
-  }
-  const handlePassword = (event) => {
-    const { value } = event.target
-    setPassword(value)
-  }
-
 
 //CHAMA API QUANDO APERTA O BUTTON
   const handleButton = async () => {
@@ -56,7 +65,7 @@ const handleProfile = async () => {
         username,
         password,
       })
-      localStorage.setItem("TOKEN_ACCESS", data.refreshToken)
+      localStorage.setItem("REFRESH_TOKEN", data.refreshToken)
       setAuthData(data)
       dispatch({ type: "LOGIN_SUCCESS", payload: data })
     } catch (error) {
@@ -64,9 +73,19 @@ const handleProfile = async () => {
     }
   }
 
+  // VALUE -> USERNAME & PASSWORD
+  const handleUsername = (e) => {
+    const { value } = e.target
+    setUsername(value)
+  }
+  const handlePassword = (event) => {
+    const { value } = event.target
+    setPassword(value)
+  }
+
   const contextValue = useMemo(
     () => ({
-      functions: { handleButton, handleProfile, handlePassword, handleUsername },
+      functions: { handleButton, handleProfile, handlePassword, handleUsername, refreshAccessToken },
       states: { state, username, password, authData, profileData },
     }),
     [state, username, password, authData, profileData]
