@@ -14,7 +14,7 @@ import "./userPage.css";
 
 function UserPage() {
   const {
-    functions: { handleProfile },
+    functions: { handleProfile, refreshAccessToken },
     states: { authData, profileData },
   } = useContext(LoginContext);
 
@@ -39,7 +39,11 @@ function UserPage() {
       </header>
       <button className="userPage__trigger" onClick={openModal}>
         Me profile
+      </button> <br />
+      <button onClick={() => refreshAccessToken()}>
+        Refresh AccessToken
       </button>
+
 
       {/* Modal: apenas dados detalhados de auth/me */}
       {isModalOpen && (
