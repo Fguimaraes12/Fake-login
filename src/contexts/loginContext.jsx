@@ -1,4 +1,4 @@
-import { useEffect, useReducer, useState, createContext, useMemo } from "react"
+import { useReducer, useState, createContext, useMemo } from "react"
 import loginInstance from "../auth/fakeAuth"
 import { initialState, Reducer } from "../reducers/reducer"
 
@@ -23,7 +23,6 @@ const refreshAccessToken = async () => {
           refreshToken: `${refreshToken}`,
           expiresInMins: 30,
       })
-      console.log(data)
       localStorage.setItem("ACCESS_TOKEN", data.accessToken)
     }catch (error) {
         console.error("Token inválido ou expirado:", error)
@@ -35,14 +34,13 @@ const refreshAccessToken = async () => {
 
 // Busca dados detalhados do perfil (auth/me) - usado no modal
 const handleProfile = async () => {
-    const token = localStorage.getItem("REFRESH_TOKEN")
-    if (token) {
+    const accessToken = localStorage.getItem("ACCESS_TOKEN")
+    if (accessToken) {
       try {
         const { data } = await loginInstance.get("/me", {
           headers: {
-            Authorization: `Bearer ${token}`,
+            Authorization: `Bearer ${accessToken}`,
           },
-          credentials: 'include'
         })
         setProfileData(data)
         return data
@@ -56,7 +54,7 @@ const handleProfile = async () => {
 
 
 
-//CHAMA API QUANDO APERTA O BUTTON
+//CHAMA API QUANDO APERTA O BUTTON"
   const handleButton = async () => {
     dispatch({ type: "LOGIN_START" })
 
