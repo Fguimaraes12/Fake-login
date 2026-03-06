@@ -1,0 +1,187 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+
+  background-image: url("../assets/backgrounds/login-page-background.jpeg");
+  background-size: cover;
+  background-position: center;
+}
+
+.login-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  height: 62vh;
+  width: 90%;
+  max-width: 60vh;
+
+  border: 6px solid rgba(77, 77, 77, 0.12);
+  border-radius: 24px;
+  background: #1a1a1a;
+}
+
+
+
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+
+
+  p {
+    font-family: 'tiempos';
+    font-size: 45px;
+    padding-bottom: 2rem;
+  }
+
+  input {
+    height: 50px;
+    width: 28rem;
+
+    font-size: 16px;
+    padding-left: 10px;
+    font-family: 'Inter';
+
+    margin-top: 13px;
+    border: 1px solid rgb(133, 133, 133);
+    border-radius: 9px;
+    box-sizing: border-box;
+
+    background-color: rgba(71, 71, 71, 0.11);
+
+    &:focus {
+      outline: none;
+      border: 2px solid rgba(116, 116, 116, 0.596);
+    }
+
+    &::placeholder {
+      color: rgb(255, 255, 255);
+    }
+
+    &:-webkit-autofill,
+    &:-webkit-autofill:hover,
+    &:-webkit-autofill:focus {
+      -webkit-box-shadow: 0 0 0px 1000px #1a1a1a inset;
+      -webkit-text-fill-color: #fff;
+      caret-color: #fff;
+    }
+  }
+
+
+}
+
+.submit-btn {
+  position: relative;
+  width: 100%;
+  height: 50px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin-top: 13px;
+  color: #fff;
+  letter-spacing: 0.05em;
+  overflow: hidden;
+  background: linear-gradient(to bottom right, #8a8a8a 0%, rgba(114, 114, 114, 0) 40%);
+  background-color: rgba(61, 61, 61, 0.219);
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 1px;
+    border-radius: 9px;
+    background: #1a1a1a;
+    z-index: 0;
+  }
+
+
+  span {
+    font-family: 'Inter';
+    position: relative;
+    z-index: 1;
+  }
+
+
+  &:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+}
+
+
+
+
+.forgot-password {
+  margin-top: 1.2rem;
+
+  span {
+    cursor: pointer;
+    color: rgb(122, 122, 122);
+  }
+}
+
+
+.login-card__social {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-top: 0.5rem;
+}
+
+.login-card__social-divider {
+  display: flex;
+  align-items: center;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  gap: 0.75rem;
+  color: rgba(255, 255, 255, 0.712);
+  font-size: 1.2rem;
+
+  span {
+    font-family: 'tiempos';
+  }
+
+
+  &::before,
+  &::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: rgba(128, 128, 128, 0.507);
+  }
+}
+
+.login-card__social-icons {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.social-btn {
+  flex: 1;
+  height: 44px;
+  border-radius: 9px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 2px solid rgba(255, 255, 255, 0.596);
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+
+  svg {
+    width: 18px;
+    height: 18px;
+  }
+}
+

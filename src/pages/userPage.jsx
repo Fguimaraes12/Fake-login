@@ -10,7 +10,7 @@ import UserPersonaInfo from "../components/user/UserPersonaInfo";
 import UserHeader from "../components/user/UserHeader";
 import UserContact from "../components/user/UserContact";
 
-import "./userPage.css";
+import "./userPage.scss";
 
 function UserPage() {
   const {
