@@ -1,0 +1,36 @@
+
+:root {
+  --bg-main: #1a1a1a;
+  --bg-input: rgba(71, 71, 71, 0.11);
+  --bg-social: rgba(255, 255, 255, 0.05);
+  
+  --text-white: #ffffff;
+  --text-dim: rgba(255, 255, 255, 0.7);
+  --text-muted: rgb(122, 122, 122);
+  --text-placeholder: rgb(255, 255, 255);
+
+  --border-card: rgba(77, 77, 77, 0.12);
+  --border-input: rgb(133, 133, 133);
+  --border-input-focus: rgba(116, 116, 116, 0.6);
+  --border-social: rgba(255, 255, 255, 0.6);
+  --divider-color: rgba(128, 128, 128, 0.5);
+
+  --btn-gradient: linear-gradient(to bottom right, #8a8a8a 0%, rgba(114, 114, 114, 0) 40%);
+  --btn-bg-fallback: rgba(61, 61, 61, 0.22);
+  
+  --font-main: 'Inter', sans-serif;
+  --font-title: 'tiempos', serif;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  background-color: #000;
+  color: var(--text-white);
+  font-family: var(--font-main);
+}

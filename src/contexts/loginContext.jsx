@@ -64,6 +64,7 @@ const handleProfile = async () => {
         password,
       })
       localStorage.setItem("REFRESH_TOKEN", data.refreshToken)
+      localStorage.setItem("ACCESS_TOKEN", data.accessToken)
       setAuthData(data)
       dispatch({ type: "LOGIN_SUCCESS", payload: data })
     } catch (error) {
