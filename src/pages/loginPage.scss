@@ -1,15 +1,12 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
-
+/* loginPage.scss */
+@import "../styles/config.scss"; // Certifique-se de importar suas variáveis
 
 .login-container {
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-
-  background-image: url("../assets/backgrounds/login-page-background.jpeg");
-  background-size: cover;
-  background-position: center;
+  background: url("../assets/backgrounds/login-page-background.jpeg") center/cover no-repeat;
 }
 
 .login-card {
@@ -17,98 +14,99 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-
-  height: 62vh;
+  
   width: 90%;
-  max-width: 60vh;
-
-  border: 6px solid rgba(77, 77, 77, 0.12);
+  max-width: 450px; // Largura fixa é melhor que vh para o card não esticar errado
+  min-height: 62vh;
+  padding: 2.5rem;
+  
+  background: var(--bg-main);
+  border: 6px solid var(--border-card);
   border-radius: 24px;
-  background: #1a1a1a;
 }
-
-
-
 
 .login-form {
   display: flex;
   flex-direction: column;
-
+  width: 100%;
 
   p {
-    font-family: 'tiempos';
+    font-family: var(--font-title);
     font-size: 45px;
+    color: var(--text-white);
     padding-bottom: 2rem;
+    text-align: center;
   }
 
   input {
     height: 50px;
-    width: 28rem;
-
-    font-size: 16px;
-    padding-left: 10px;
-    font-family: 'Inter';
-
+    width: 100%;
     margin-top: 13px;
-    border: 1px solid rgb(133, 133, 133);
+    padding-left: 15px;
+    
+    font-family: var(--font-main);
+    font-size: 16px;
+    color: var(--text-white);
+    
+    background-color: var(--bg-input);
+    border: 1px solid var(--border-input);
     border-radius: 9px;
-    box-sizing: border-box;
-
-    background-color: rgba(71, 71, 71, 0.11);
+    outline: none;
+    transition: var(--transition); // Adicione isso no config se quiser suavidade
 
     &:focus {
-      outline: none;
-      border: 2px solid rgba(116, 116, 116, 0.596);
+      border: 2px solid var(--border-input-focus);
     }
 
     &::placeholder {
-      color: rgb(255, 255, 255);
+      color: var(--text-placeholder);
+      opacity: 0.6;
     }
 
-    &:-webkit-autofill,
-    &:-webkit-autofill:hover,
-    &:-webkit-autofill:focus {
-      -webkit-box-shadow: 0 0 0px 1000px #1a1a1a inset;
-      -webkit-text-fill-color: #fff;
-      caret-color: #fff;
+    // Resolve o problema do fundo branco chato do Chrome
+    &:-webkit-autofill {
+      -webkit-box-shadow: 0 0 0px 1000px var(--bg-main) inset !important;
+      -webkit-text-fill-color: var(--text-white) !important;
     }
   }
-
-
 }
 
 .submit-btn {
   position: relative;
   width: 100%;
   height: 50px;
+  margin-top: 20px;
+  
+  background: var(--btn-gradient);
+  background-color: var(--btn-bg-fallback);
   border: none;
   border-radius: 10px;
   cursor: pointer;
-  font-size: 0.95rem;
-  font-weight: 600;
-  margin-top: 13px;
-  color: #fff;
-  letter-spacing: 0.05em;
   overflow: hidden;
-  background: linear-gradient(to bottom right, #8a8a8a 0%, rgba(114, 114, 114, 0) 40%);
-  background-color: rgba(61, 61, 61, 0.219);
+
+  span {
+    font-family: var(--font-main);
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--text-white);
+    position: relative;
+    z-index: 1;
+    letter-spacing: 0.05em;
+  }
 
   &::before {
     content: "";
     position: absolute;
     inset: 1px;
+    background: var(--bg-main);
     border-radius: 9px;
-    background: #1a1a1a;
     z-index: 0;
+    transition: opacity 0.3s;
   }
 
-
-  span {
-    font-family: 'Inter';
-    position: relative;
-    z-index: 1;
+  &:hover::before {
+    opacity: 0.8; // Efeito sutil de brilho ao passar o mouse
   }
-
 
   &:disabled {
     opacity: 0.4;
@@ -116,72 +114,73 @@
   }
 }
 
-
-
-
 .forgot-password {
   margin-top: 1.2rem;
+  text-align: center;
 
   span {
+    font-family: var(--font-main);
+    font-size: 0.9rem;
+    color: var(--text-muted);
     cursor: pointer;
-    color: rgb(122, 122, 122);
+    transition: color 0.3s;
+
+    &:hover {
+      color: var(--text-white);
+    }
   }
-}
-
-
-.login-card__social {
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-  margin-top: 0.5rem;
 }
 
 .login-card__social-divider {
   display: flex;
   align-items: center;
-  margin-top: 2rem;
-  margin-bottom: 2rem;
+  width: 100%;
+  margin: 2rem 0;
   gap: 0.75rem;
-  color: rgba(255, 255, 255, 0.712);
-  font-size: 1.2rem;
-
+  color: var(--text-dim);
+  
   span {
-    font-family: 'tiempos';
+    font-family: var(--font-title);
+    font-size: 1.1rem;
   }
 
-
-  &::before,
-  &::after {
+  &::before, &::after {
     content: "";
     flex: 1;
     height: 1px;
-    background: rgba(128, 128, 128, 0.507);
+    background: var(--divider-color);
   }
 }
 
 .login-card__social-icons {
   display: flex;
   gap: 0.75rem;
+  width: 100%;
 }
 
 .social-btn {
   flex: 1;
   height: 44px;
-  border-radius: 9px;
-  background: rgba(255, 255, 255, 0.05);
-  border: 2px solid rgba(255, 255, 255, 0.596);
-  color: rgba(255, 255, 255, 0.6);
-  font-size: 0.85rem;
-  font-weight: 500;
-  cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
 
+  background: var(--bg-social);
+  border: 2px solid var(--border-social);
+  border-radius: 9px;
+  color: var(--text-dim);
+  cursor: pointer;
+  transition: transform 0.2s;
+
+  &:hover {
+    transform: translateY(-2px);
+    border-color: var(--text-white);
+  }
+
   svg {
     width: 18px;
     height: 18px;
+    fill: currentColor;
   }
 }
-
